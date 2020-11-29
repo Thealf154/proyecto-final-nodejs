@@ -18,10 +18,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
-app.use("/", index);
+//app.use("/", index);
+app.get('/', index); 
 app.use("/user", user);
 app.use(auth);
-app.use("/home")
 app.use(notFound);
 
 app.listen(process.env.PORT || 3000, () => {
