@@ -21,9 +21,9 @@ getData.get("/:id([0-9]{1,3})", async (req, res, next) => {
 getData.get("/:name([A-Za-z]+)", async (req, res, next) => {
   const name = req.params.name;
   let tabla = await db.query(
-    `SELECT nombre FROM Empleados WHERE nombre LIKE '%${name}%'`
+    `SELECT * FROM Empleados WHERE nombre LIKE '%${name}%'`
   );
-  if (tabla.length > 0)
+  if (tabla.length < 0)
     return res
       .status(404)
       .json({ code: 404, message: "Empleado no encontrado" });
