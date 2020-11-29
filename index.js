@@ -10,7 +10,7 @@ const user = require("./routes/user");
 const auth = require("./middleware/auth")
 const notFound = require("./middleware/notFound");
 const index = require("./middleware/index");
-const cors = require("./middleware/cors")
+const cors = require("./middleware/cors");
 
 //Auth and morgan
 app.use(cors);
