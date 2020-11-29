@@ -4,10 +4,10 @@ const util = require("util");
 //This will create multiple connections
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "nodejs"
+    host: "db4free.net",
+    user: "aledeawilliams",
+    password: "panaderoconelpan",
+    database: "nodejs_mau"
 });
 
 //All the database requests wil be JS promises

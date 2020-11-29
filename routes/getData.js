@@ -32,11 +32,11 @@ getData.get("/:name([A-Za-z]+)", async (req, res, next) => {
 
 //Post routes
 getData.post("/", async (req, res, next) => {
-  const { nombre, apellidos, telefono, correo, direccion, status } = req.body;
+  const { nombre, apellidos, telefono, correo, direccion} = req.body;
       
-  if (nombre && apellidos && telefono && correo && direccion && status) {
-    let query = "INSERT INTO Empleados (nombre, apellidos, telefono, correo, direccion, status)";
-    query += ` VALUES('${nombre}', '${apellidos}', '${telefono}', '${correo}', '${direccion}', '${status}')`;
+  if (nombre && apellidos && telefono && correo && direccion) {
+    let query = "INSERT INTO Empleados (nombre, apellidos, telefono, correo, direccion)";
+    query += ` VALUES('${nombre}', '${apellidos}', '${telefono}', '${correo}', '${direccion}')`;
     const rows = await db.query(query);
     if (rows.affectedRows == 1) {
       return res
@@ -65,7 +65,7 @@ getData.delete("/:id([0-9]{1,3})", async (req, res, next) => {
 
 //Patch routes
 getData.patch("/:id([0-9]{1,3})", async (req, res, next) => {
-  const { nombre, apellidos, telefono, correo, direccion, status } = req.body;
+  const { nombre, apellidos, telefono, correo, direccion } = req.body;
 
   if (req.body.nombre) {
     let query = `UPDATE Empleados SET nombre='${nombre}' WHERE id_empleado=${req.params.id}`;
