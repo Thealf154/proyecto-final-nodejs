@@ -4,82 +4,84 @@ const db = require("../config/database")
 
 //Get routes
 getData.get("/", async (req, res, next) => {
-  const pkmn = await db.query("SELECT * FROM pokemon");
-  return res.status(200).json({ code: 200, message: pkmn });
+  const tabla = await db.query("SELECT * FROM nodejs-SA-CV");
+  return res.status(200).json({ code: 200, message: tabla });
 });
 
 getData.get("/:id([0-9]{1,3})", async (req, res, next) => {
-  const pokemon = await db.query("SELECT * FROM pokemon");
+  const tabla = await db.query("SELECT * FROM nodejs-SA-CV");
   const id = req.params.id - 1;
-  if (id >= 0 && id < 722) {
-    return res.status(200).json({ code: 200, message: pokemon[id] });
+  try {
+    return res.status(200).json({ code: 200, message: tabla[id] });
+  } catch (error) {
+    return res.status(404).json({ code: 404, message: "Empleado no encontrado" });
   }
-  return res.status(404).json({ code: 404, message: "Pokemon no encontrado" });
 });
 
 getData.get("/:name([A-Za-z]+)", async (req, res, next) => {
   const name = req.params.name;
-  let pokemon = await db.query(
-    `SELECT pok_name FROM pokemon WHERE pok_name LIKE '%${name}%'`
+  let tabla = await db.query(
+    `SELECT nombre FROM nodejs-SA-CV WHERE nombre LIKE '%${name}%'`
   );
-  if (pokemon.length > 0)
+  if (tabla.length > 0)
     return res
       .status(404)
-      .json({ code: 404, message: "Pokemon no encontrado" });
-  return res.status(200).send(pokemon);
+      .json({ code: 404, message: "Empleado no encontrado" });
+  return res.status(200).send(tabla);
 });
 
 //Post routes
 getData.post("/", async (req, res, next) => {
-  const { pok_name, pok_height, pok_weight, pok_base_experience } = req.body;
-
-  if (pok_name && pok_height && pok_base_experience && pok_weight) {
-    let query =
-      "INSERT INTO pokemon (pok_name, pok_height, pok_weight, pok_base_experience)";
-    query += ` VALUES('${pok_name}', ${pok_height}, ${pok_weight}, ${pok_base_experience})`;
+  const { nombre, apellidos, telefono, correo, direccion, status } = req.body;
+      
+  if (nombre && apellidos && telefono && correo && direccion && status) {
+    let query =SC
+      "INSERT INTO nodejs-SA-CV (nombre, apellidos, telefono, correo, direccion, status)";
+    query += ` VALUES('${nombre}', ${apellidos}, ${telefono}, ${correo}, ${direccion}, ${status})`;
     const rows = await db.query(query);
     if (rows.affectedRows == 1) {
       return res
         .status(200)
-        .json({ code: 201, message: "Pokemon insertado correctamente" });
+        .json({ code: 201, message: "Empleado insertado correctamente" });
     }
     return res.status(500).json({ code: 500, message: "Campos incompletos" });
   }
   return res
     .status(500)
-    .json({ code: 500, message: "Pokemon insertado sin éxito" });
+    .json({ code: 500, message: "Empleado insertado sin éxito" });
 });
 
 //Delete routes
-pokemonRoutes.delete("/:id([0-9]{1,3})", async (req, res, next) => {
-  const query = `DELETE FROM pokemon WHERE pok_id=${req.params.id}`;
+getData.delete("/:id([0-9]{1,3})", async (req, res, next) => {
+  const query = `DELETE FROM nodejs-SA-CV WHERE id_empleado=${req.params.id}`;
   const rows = await db.query(query);
 
   if (rows.affectedRows == 1) {
     return res
       .status(200)
-      .json({ code: 200, message: "Pokemon borrado correctamente" });
+      .json({ code: 200, message: "Empleado borrado correctamente" });
   }
-  return res.status(404).json({ code: 404, message: "Pokemon no encontrado" });
+  return res.status(404).json({ code: 404, message: "Empleado no encontrado" });
 });
 
 //Patch routes
 getData.patch("/:id([0-9]{1,3})", async (req, res, next) => {
-  const { pok_name, pok_height, pok_weight, pok_base_experience } = req.body;
+  const { nombre, apellidos, telefono, correo, direccion, status } = req.body;
 
-  if (req.body.pok_name) {
-    let query = `UPDATE pokemon SET pok_name='${pok_name}' WHERE pok_id=${req.params.id}`;
+  if (req.body.nombre) {SC
+    let query = `UPDATE nodejs-SA-CV SET nombre='${nombre}' WHERE id_empleado=${req.params.id}`;
 
     const rows = await db.query(query);
 
     if (rows.affectedRows == 1) {
       return res
         .status(200)
-        .json({ code: 200, message: "Pokemon actualizado correctamente" });
+        .json({ code: 200, message: "Empleado actualizado correctamente" });
     }
     return res.status(500).json({ code: 500, message: "Campos incompletos" });
   }
 
-  return res.status(500).json({ code: 500, message: "No existe el Pokemon" });
+  return res.status(500).json({ code: 500, message: "No existe el Empleado" });
 });
+
 module.exports = getData;
