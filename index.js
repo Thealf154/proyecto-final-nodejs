@@ -21,6 +21,7 @@ app.use(express.urlencoded({ extended: true}));
 //app.use("/", index);
 app.get('/', index); 
 app.use("/user", user);
+app.use("/empleados", getData);
 app.use(auth);
 app.use(notFound);
 

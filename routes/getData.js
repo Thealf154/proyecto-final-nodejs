@@ -4,12 +4,12 @@ const db = require("../config/database")
 
 //Get routes
 getData.get("/", async (req, res, next) => {
-  const tabla = await db.query("SELECT * FROM nodejs-SA-CV");
+  const tabla = await db.query("SELECT * FROM Empleados");
   return res.status(200).json({ code: 200, message: tabla });
 });
 
 getData.get("/:id([0-9]{1,3})", async (req, res, next) => {
-  const tabla = await db.query("SELECT * FROM nodejs-SA-CV");
+  const tabla = await db.query("SELECT * FROM Empleados");
   const id = req.params.id - 1;
   try {
     return res.status(200).json({ code: 200, message: tabla[id] });
@@ -21,7 +21,7 @@ getData.get("/:id([0-9]{1,3})", async (req, res, next) => {
 getData.get("/:name([A-Za-z]+)", async (req, res, next) => {
   const name = req.params.name;
   let tabla = await db.query(
-    `SELECT nombre FROM nodejs-SA-CV WHERE nombre LIKE '%${name}%'`
+    `SELECT nombre FROM Empleados WHERE nombre LIKE '%${name}%'`
   );
   if (tabla.length > 0)
     return res
@@ -35,9 +35,8 @@ getData.post("/", async (req, res, next) => {
   const { nombre, apellidos, telefono, correo, direccion, status } = req.body;
       
   if (nombre && apellidos && telefono && correo && direccion && status) {
-    let query =SC
-      "INSERT INTO nodejs-SA-CV (nombre, apellidos, telefono, correo, direccion, status)";
-    query += ` VALUES('${nombre}', ${apellidos}, ${telefono}, ${correo}, ${direccion}, ${status})`;
+    let query = "INSERT INTO Empleados (nombre, apellidos, telefono, correo, direccion, status)";
+    query += ` VALUES('${nombre}', '${apellidos}', '${telefono}', '${correo}', '${direccion}', '${status}')`;
     const rows = await db.query(query);
     if (rows.affectedRows == 1) {
       return res
@@ -53,7 +52,7 @@ getData.post("/", async (req, res, next) => {
 
 //Delete routes
 getData.delete("/:id([0-9]{1,3})", async (req, res, next) => {
-  const query = `DELETE FROM nodejs-SA-CV WHERE id_empleado=${req.params.id}`;
+  const query = `DELETE FROM Empleados WHERE id_empleado=${req.params.id}`;
   const rows = await db.query(query);
 
   if (rows.affectedRows == 1) {
@@ -68,8 +67,8 @@ getData.delete("/:id([0-9]{1,3})", async (req, res, next) => {
 getData.patch("/:id([0-9]{1,3})", async (req, res, next) => {
   const { nombre, apellidos, telefono, correo, direccion, status } = req.body;
 
-  if (req.body.nombre) {SC
-    let query = `UPDATE nodejs-SA-CV SET nombre='${nombre}' WHERE id_empleado=${req.params.id}`;
+  if (req.body.nombre) {
+    let query = `UPDATE Empleados SET nombre='${nombre}' WHERE id_empleado=${req.params.id}`;
 
     const rows = await db.query(query);
 

@@ -7,7 +7,7 @@ const pool = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "",
-    database: "pokemon_bien"
+    database: "nodejs"
 });
 
 //All the database requests wil be JS promises
