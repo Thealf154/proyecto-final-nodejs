@@ -1,5 +1,6 @@
 const express = require("express");
 const getData = express.Router();
+const db = require("../config/database")
 
 //Get routes
 getData.get("/", async (req, res, next) => {
