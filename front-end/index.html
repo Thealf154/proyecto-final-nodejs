@@ -5,12 +5,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pokedex</title>
+    <title>Bienvenido</title>
+    <script src="./js/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-    <script>
-        window.location.href = "login.html";
-    </script>
+
+    <div>
+        <nav class="light-blue dark-4">
+            <div class="container">
+                <a class="brand-logo" href="/">Node.js S.A de C.V</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col s5">
+                    <div class="card">
+                        <div class="card-content">
+                            <form>
+                                <div class="row">
+                                    <div class="input-field cols12">
+                                        <input name="nombre" type="text" placeholder="nombre" ></input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field cols12">
+                                        <input name="apellidos" type="text" placeholder="apellidos"
+                                            ></input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field cols12">
+                                        <input name="telefono" type="text" placeholder="telefono"
+                                            ></input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field cols12">
+                                        <input name="correo" type="text" placeholder="correo" ></input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field cols12">
+                                        <input name="direccion" type="text" placeholder="drieccion"
+                                            ></input>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-light darken-4">
+                                    Enviar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s7">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>nombre</th>
+                                <th>apellidos</th>
+                                <th>telefono</th>
+                                <th>correo</th>
+                                <th>direccion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="datos">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
+
 </html>
