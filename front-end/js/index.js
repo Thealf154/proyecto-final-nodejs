@@ -26,14 +26,14 @@ const renderData = empleados => {
     let tabla = document.querySelector("#datos");
     let fila = "<tr><td>" + nombre + "</td><td>" + apellidos + "</td><td>" + telefono + "</td><td>" + correo + "</td><td>" + direccion + "</td><td>";
     fila += "<button onclick= deleteEmpleado(" + id_empleado + ") class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons' >delete</i></button>";
-    fila += "<button class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons'>edit</i></button></td></tr>";
+    fila += "<button onclick= editEmpleado(" + id_empleado + "class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons'>edit</i></button></td></tr>";
     tabla.innerHTML += fila;
   });
 }
 
 const deleteEmpleado = (id) => {
   axios
-    .delete("http://localhost:3000/empleados/" + id, {
+    .delete("http://localhost:3000/empleados/id:" + id, {
       headers: {
         Authorization: "bearer " + localStorage.getItem("token"),
       },
@@ -44,4 +44,8 @@ const deleteEmpleado = (id) => {
     .catch(function (err) {
       console.log(err);
     });
+}
+
+const editEmpleado = id => {
+
 }
