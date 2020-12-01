@@ -7,7 +7,8 @@ const pool = mysql.createPool({
     host: "db4free.net",
     user: "aledeawilliams",
     password: "panaderoconelpan",
-    database: "nodejs_mau"
+    database: "nodejs_mau",
+    timeout: 60 * 60 * 1000
 });
 
 //All the database requests wil be JS promises
