@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/estilos.css">
 </head>
 
 <body>
@@ -19,8 +20,9 @@
         <nav class="light-blue dark-4">
             <div class="container">
                 <a class="brand-logo" href="/">Node.js S.A de C.V</a>
-                <div>
-                    
+                <div class="buscador">
+                    <input type="text" id="search" style="border-bottom: 2px solid blue;" placeholder="Buscar por nombre" onclick="buscador()">
+                        <i class='material-icons botoncito'>pageview</i>
                 </div>
             </div>
         </nav>

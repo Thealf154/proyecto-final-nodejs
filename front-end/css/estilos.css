@@ -1,0 +1,19 @@
+*{/*Formato de mi hoja o ventana completa */
+    margin:0px;
+    padding: 0px;
+   }
+
+.buscador{
+    float: left;
+    position: relative;
+    padding-left: 70%;
+    display: flex;
+    
+}
+.botoncito{
+    font-size: 40px !important;
+    padding: 5px;
+}
+/*.buscador > input{
+   border:5px;
+}*/

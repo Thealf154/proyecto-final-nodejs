@@ -2,6 +2,7 @@ window.onload = init;
 
 function init() {
   getData();
+
 }
 
 const getData = () => {
@@ -163,5 +164,18 @@ const editEmpleado = (id, id_empleado) => {
       });
   })
 }
-  /*button.onclick(() => {
-   */
+
+const buscador = () => {
+  let button = document.getElementsByClassName("botoncito")[0];
+  button.addEventListener("click", function () {
+    let search = document.getElementById("search").value;
+    let celdas = document.getElementsByTagName("tr");
+    for(let i = 1; i <= celdas.length; i++){
+      let nombre = celdas[i].cells[0].innerHTML;
+      if(search != nombre){
+        celdas[i].style.display = "none"
+      }
+      console.log(nombre);
+    }
+  })
+  }
