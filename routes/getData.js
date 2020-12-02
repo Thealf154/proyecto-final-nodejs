@@ -68,7 +68,7 @@ getData.patch("/:id([0-9]{1,3})", async (req, res, next) => {
   const { nombre, apellidos, telefono, correo, direccion } = req.body;
 
   if (req.body.nombre) {
-    let query = `UPDATE Empleados SET nombre='${nombre}' WHERE id_empleado=${req.params.id}`;
+    let query = `UPDATE Empleados SET nombre='${nombre}', apellidos='${apellidos}', telefono='${telefono}', correo='${correo}', direccion='${direccion}' WHERE id_empleado=${req.params.id}`;
 
     const rows = await db.query(query);
 
