@@ -1,8 +1,8 @@
 window.onload = init;
 
-function init () {
+function init() {
   getData();
-};
+}
 
 const getData = () => {
   axios
@@ -20,20 +20,44 @@ const getData = () => {
     });
 };
 
-const renderData = empleados => {
-  empleados.forEach(empleado => {
-    const {id_empleado, nombre , apellidos, telefono, correo, direccion} = empleado;
+const renderData = (empleados) => {
+  empleados.forEach((empleado) => {
+    const {
+      id_empleado,
+      nombre,
+      apellidos,
+      telefono,
+      correo,
+      direccion,
+    } = empleado;
     let tabla = document.querySelector("#datos");
-    let fila = "<tr><td>" + nombre + "</td><td>" + apellidos + "</td><td>" + telefono + "</td><td>" + correo + "</td><td>" + direccion + "</td><td>";
-    fila += "<button onclick= deleteEmpleado(" + id_empleado + ") class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons' >delete</i></button>";
-    fila += "<button onclick= editEmpleado(" + id_empleado + ") class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons'>edit</i></button></td></tr>";
+    let fila =
+      "<tr><td>" +
+      nombre +
+      "</td><td>" +
+      apellidos +
+      "</td><td>" +
+      telefono +
+      "</td><td>" +
+      correo +
+      "</td><td>" +
+      direccion +
+      "</td><td>";
+    fila +=
+      "<button onclick= deleteEmpleado(" +
+      id_empleado +
+      ") class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons' >delete</i></button>";
+    fila +=
+      "<button onclick= editEmpleado(" +
+      id_empleado +
+      ") class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons'>edit</i></button></td></tr>";
     tabla.innerHTML += fila;
   });
-}
+};
 
 const refreshData = () => {
   window.location.href = "./index.html";
-}
+};
 
 const deleteEmpleado = (id) => {
   axios
@@ -48,33 +72,32 @@ const deleteEmpleado = (id) => {
     .catch(function (err) {
       console.log(err);
     });
-}
+};
 
-function addEmpleado () {
+function addEmpleado() {
+  let nombre = document.getElementsByName("nombre")[0].value;
+  let apellidos = document.getElementsByName("apellidos")[0].value
+  let telefono = document.getElementById("telefono").value;
+  let correo = document.getElementById("correo").value;
+  let direccion = document.getElementById("direccion").value;
 
-
-  const nombre = document.getElementsByTagName("input").nombre.value;
-  const apellidos = document.getElementsByTagName("input").apellidos.value;
-  const telefono = document.getElementsByTagName("input").telefono.value;
-  const correo = document.getElementsByTagName("input").correo.value;
-  const direccion = document.getElementsByTagName("input").direccion.value;
-
-  axios
-    .post("http://localhost:3000/empleados/", {
-      headers: {
-        Authorization: "bearer " + localStorage.getItem("token"),
-      },
-      data: {
-        nombre : nombre,
-        apellidos: apellidos,
-        telefono: telefono,
-        correo: correo,
-        direccion: direccion
-      },
-      body: data
-    })
+  axios({
+    url: "http://localhost:3000/empleados/",
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    data: {
+      nombre: nombre,
+      apellidos: apellidos,
+      telefono: telefono,
+      correo: correo,
+      direccion: direccion,
+    },
+  })
     .then(function (res) {
-      setInterval(10000)
+      setInterval(10000);
       refreshData();
     })
     .catch(function (err) {
@@ -83,6 +106,4 @@ function addEmpleado () {
     });
 }
 
-const editEmpleado = id => {
-
-}
+const editEmpleado = (id) => {};
