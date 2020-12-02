@@ -46,11 +46,13 @@ const renderData = (empleados) => {
       "</td><td>";
     fila +=
       "<button onclick= deleteEmpleado(" +
-      id_empleado+
+      id_empleado +
       ") class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons' >delete</i></button>";
     fila +=
       "<button onclick= editEmpleado(" +
-      cont + "," + id_empleado +
+      cont +
+      "," +
+      id_empleado +
       ") class='btn light blue darken-4' style='margin-left: 4px'><i class='material-icons'>edit</i></button></td></tr>";
     tabla.innerHTML += fila;
     cont++;
@@ -110,7 +112,7 @@ function addEmpleado() {
 
 const editEmpleado = (id, id_empleado) => {
   //Valores del input
-  console.log(id)
+  console.log(id);
   let nombre = document.getElementsByName("nombre")[0];
   let apellidos = document.getElementsByName("apellidos")[0];
   let telefono = document.getElementById("telefono");
@@ -126,10 +128,16 @@ const editEmpleado = (id, id_empleado) => {
     info[i].value = texto;
   }
 
-  let button = document.getElementById("botonMagico");
-  button.innerHTML = "Editar";
-  button.addEventListener("onclick");
-  button.onclick(() => {
+  document.getElementById("botonMagico").style.display = "none";
+  var newButton = document.createElement("button");
+  newButton.innerHTML = "Edit";
+
+  // 2. Append somewhere
+  var card = document.getElementsByClassName("card-content")[0];
+  card.appendChild(newButton);
+
+  // 3. Add event handler
+  newButton.addEventListener("click", function () {
     axios({
       url: "http://localhost:3000/empleados/" + id_empleado,
       method: "PATCH",
@@ -153,5 +161,7 @@ const editEmpleado = (id, id_empleado) => {
         setTimeout(10000);
         console.log(err);
       });
-  });
-};
+  })
+}
+  /*button.onclick(() => {
+   */
