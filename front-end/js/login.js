@@ -7,6 +7,9 @@ function init() {
       window.location.href = "signin.html";
     });
   document.querySelector(".btn-primary").addEventListener("click", login);
+
+  if(localStorage.getItem("token"))
+    window.location.href = "index.html"
 }
 
 function login() {
