@@ -10,9 +10,15 @@
     display: flex;
     
 }
+
 .botoncito{
     font-size: 40px !important;
     padding: 5px;
+}
+#search {
+    border-bottom: 2px solid white;
+    color: white;
+    margin-left: 9rem;
 }
 /*.buscador > input{
    border:5px;

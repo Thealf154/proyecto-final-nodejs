@@ -1,8 +1,11 @@
 window.onload = init;
 
 function init() {
+  if (!localStorage.getItem("token")) {
+    alert("Inicia tu sesión primero ");
+    window.location.href = "login.html";
+  }
   getData();
-
 }
 
 const getData = () => {
@@ -131,7 +134,8 @@ const editEmpleado = (id, id_empleado) => {
 
   document.getElementById("botonMagico").style.display = "none";
   var newButton = document.createElement("button");
-  newButton.innerHTML = "Edit";
+  newButton.innerHTML = "Editar";
+  newButton.className = "btn btn-light darken-4";
 
   // 2. Append somewhere
   var card = document.getElementsByClassName("card-content")[0];
@@ -162,20 +166,36 @@ const editEmpleado = (id, id_empleado) => {
         setTimeout(10000);
         console.log(err);
       });
-  })
-}
+  });
+};
 
 const buscador = () => {
   let button = document.getElementsByClassName("botoncito")[0];
   button.addEventListener("click", function () {
-    let search = document.getElementById("search").value;
-    let celdas = document.getElementsByTagName("tr");
-    for(let i = 1; i <= celdas.length; i++){
+    buscar();
+  });
+};
+
+const buscadorDinámico = () => {
+  let input = document.getElementById("search");
+  input.addEventListener("keyup", function (event) {
+      buscar();
+  });
+};
+
+const buscar = () => {
+  console.log("triggered");
+  let searchValue = document.getElementById("search").value;
+  let celdas = document.getElementsByTagName("tr");
+  for (let i = 1; i <= celdas.length; i++) {
+    try {
       let nombre = celdas[i].cells[0].innerHTML;
-      if(search != nombre){
-        celdas[i].style.display = "none"
+      if (nombre.includes(searchValue)) {
+        celdas[i].style.display = "";
+      } else {
+        celdas[i].style.display = "none";
       }
-      console.log(nombre);
+    } catch (error) {
     }
-  })
   }
+};
