@@ -184,7 +184,6 @@ const buscadorDinámico = () => {
 };
 
 const buscar = () => {
-  console.log("triggered");
   let searchValue = document.getElementById("search").value;
   let celdas = document.getElementsByTagName("tr");
   for (let i = 1; i <= celdas.length; i++) {
